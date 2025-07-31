@@ -24,15 +24,12 @@ require_once __DIR__ . '/../config/config.php';
         <div style="text-align: center; padding: 2rem 0;">
             <h1>🎉 Final System Test</h1>
             <p><strong>Hệ thống tuyển sinh đã hoàn thiện!</strong></p>
-            
             <?php if (isset($_SESSION['user_id'])): ?>
                 <p class="status-good">✅ <strong>Đang đăng nhập:</strong> <?php echo htmlspecialchars($_SESSION['user_name']); ?> (<?php echo $_SESSION['is_admin'] ? 'Admin' : 'Student'; ?>)</p>
             <?php else: ?>
                 <p class="status-pending">⏳ <strong>Chưa đăng nhập</strong></p>
             <?php endif; ?>
         </div>
-
-        <!-- LOGIN SECTION -->
         <?php if (!isset($_SESSION['user_id'])): ?>
         <div style="background: #e7f3ff; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
             <h2>🔐 Đăng nhập nhanh</h2>
@@ -51,10 +48,7 @@ require_once __DIR__ . '/../config/config.php';
             <p><small>Password cho cả 2 tài khoản: <strong>password</strong></small></p>
         </div>
         <?php endif; ?>
-
-        <!-- FEATURES OVERVIEW -->
         <div class="test-grid">
-            <!-- ADMIN FEATURES -->
             <div class="test-card admin-card">
                 <h2>👨‍💼 Admin Features</h2>
                 <p><strong>Quản trị viên có thể:</strong></p>
@@ -65,8 +59,6 @@ require_once __DIR__ . '/../config/config.php';
                 </div>
                 <p><small>✅ Thêm/sửa/xóa ngành<br>✅ Xem và duyệt hồ sơ<br>✅ Quản lý users</small></p>
             </div>
-
-            <!-- STUDENT FEATURES -->
             <div class="test-card student-card">
                 <h2>👨‍🎓 Student Features</h2>
                 <p><strong>Sinh viên có thể:</strong></p>
@@ -82,8 +74,6 @@ require_once __DIR__ . '/../config/config.php';
                 <p><small>✅ Nộp hồ sơ trực tuyến<br>✅ Theo dõi trạng thái<br>✅ Quản lý tài khoản</small></p>
             </div>
         </div>
-
-        <!-- SYSTEM STATUS -->
         <div style="background: #f8f9fa; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
             <h2>📊 System Status</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
@@ -113,8 +103,6 @@ require_once __DIR__ . '/../config/config.php';
                 </div>
             </div>
         </div>
-
-        <!-- QUICK ACTIONS -->
         <div style="text-align: center; padding: 2rem 0;">
             <h2>🚀 Quick Actions</h2>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -126,8 +114,6 @@ require_once __DIR__ . '/../config/config.php';
                 <?php endif; ?>
             </div>
         </div>
-
-        <!-- SUCCESS MESSAGE -->
         <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 2rem; border-radius: 8px; text-align: center; margin: 2rem 0;">
             <h2>🎊 System Successfully Integrated!</h2>
             <p><strong>Hệ thống tuyển sinh đã hoàn thiện với đầy đủ chức năng cho cả Admin và Student!</strong></p>
@@ -139,7 +125,6 @@ require_once __DIR__ . '/../config/config.php';
                 <li>✅ Beautiful & Responsive UI</li>
             </ul>
         </div>
-
         <p style="text-align: center; color: #666;">
             <small>Mọi chức năng đã được test và hoạt động bình thường. Hệ thống sẵn sàng để sử dụng!</small>
         </p>

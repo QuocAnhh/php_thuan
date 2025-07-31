@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config/config.php';
-
-// Auto-login admin for testing (Remove in production)
 if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
     $_SESSION['user_id'] = 1;
     $_SESSION['user_name'] = 'Test Admin User';
@@ -32,8 +30,6 @@ if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
 <body>
     <div class="container">
         <h1>🛡️ Admin Portal</h1>
-        
-        <!-- Session Status -->
         <div class="admin-section">
             <h2>📊 Session Status</h2>
             <?php if (isset($_SESSION['user_id']) && $_SESSION['is_admin']): ?>
@@ -45,27 +41,21 @@ if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
                 <p><a href="<?php echo base_url('login'); ?>" class="function-link">🔐 Manual Login</a></p>
             <?php endif; ?>
         </div>
-
         <?php if (isset($_SESSION['user_id']) && $_SESSION['is_admin']): ?>
-        <!-- Admin Functions -->
         <div class="admin-section">
             <h2>👨‍💼 Admin Functions</h2>
-            
             <h3>🛣️ Via Routing (May not work due to session issues):</h3>
             <p>
                 <a href="<?php echo base_url('majors'); ?>" class="function-link route-link" target="_blank">📚 Manage Majors</a>
                 <a href="<?php echo base_url('admin/applications'); ?>" class="function-link route-link" target="_blank">📄 Manage Applications</a>
                 <a href="<?php echo base_url('dashboard'); ?>" class="function-link route-link" target="_blank">📋 Dashboard</a>
             </p>
-            
             <h3>🎯 Direct Access (Should always work):</h3>
             <p>
                 <a href="<?php echo base_url('majors_direct.php'); ?>" class="function-link direct-link" target="_blank">📚 Majors Direct</a>
                 <a href="<?php echo base_url('admin_apps_direct.php'); ?>" class="function-link direct-link" target="_blank">📄 Applications Direct</a>
             </p>
         </div>
-
-        <!-- Additional Admin Tools -->
         <div class="admin-section">
             <h2>🔧 Admin Tools</h2>
             <p>
@@ -74,8 +64,6 @@ if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
                 <a href="<?php echo base_url('admin/applications/show?id=1'); ?>" class="function-link" target="_blank">👀 View Application</a>
             </p>
         </div>
-
-        <!-- Debug Tools -->
         <div class="admin-section">
             <h2>🐛 Debug Tools</h2>
             <p>
@@ -85,8 +73,6 @@ if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
             </p>
         </div>
         <?php endif; ?>
-
-        <!-- Navigation -->
         <div class="admin-section">
             <h2>🔗 Navigation</h2>
             <p>
@@ -94,7 +80,6 @@ if (!isset($_SESSION['user_id']) && isset($_GET['auto_admin'])) {
                 <a href="<?php echo base_url('logout'); ?>" class="function-link">🚪 Logout</a>
             </p>
         </div>
-
         <hr>
         <p><small>💡 <strong>Tip:</strong> Nếu "Via Routing" links không hoạt động, hãy dùng "Direct Access" links.</small></p>
     </div>

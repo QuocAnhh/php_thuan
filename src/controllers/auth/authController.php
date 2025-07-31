@@ -1,29 +1,20 @@
 <?php
 session_start();
 require_once __DIR__ . '/../../config/config.php';
-
-
 function show_register_form() {
     require_once '../public/auth/register.php';
 }
-
 function show_login_form() {
     require_once '../public/auth/login.php';
 }
-
 function handle_register() {
     global $conn;
-
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    // Basic validation
     if (empty($name) || empty($email) || empty($password)) {
         die("Please fill all required fields.");
     }
-
-    // Check if email already exists
     $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ?");
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
@@ -32,16 +23,10 @@ function handle_register() {
         die("Email already exists.");
     }
     mysqli_stmt_close($stmt);
-
-    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Insert user into the database
     $stmt = mysqli_prepare($conn, "INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
     mysqli_stmt_bind_param($stmt, "sss", $name, $email, $hashed_password);
-
     if (mysqli_stmt_execute($stmt)) {
-        // Redirect to login page on successful registration
         header("Location: /login");
         exit();
     } else {
@@ -49,33 +34,22 @@ function handle_register() {
     }
     mysqli_stmt_close($stmt);
 }
-
 function handle_login() {
     global $conn;
-
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    // Basic validation
     if (empty($email) || empty($password)) {
         die("Please fill all required fields.");
     }
-
-    // Find user by email
     $stmt = mysqli_prepare($conn, "SELECT id, name, password, is_admin FROM users WHERE email = ?");
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-
     if ($user = mysqli_fetch_assoc($result)) {
-        // Verify password
         if (password_verify($password, $user['password'])) {
-            // Password is correct, start session
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['is_admin'] = $user['is_admin'];
-
-            // Redirect to dashboard
             header("Location: /dashboard");
             exit();
         } else {
@@ -86,7 +60,6 @@ function handle_login() {
     }
     mysqli_stmt_close($stmt);
 }
-
 function handle_logout() {
     session_start();
     session_unset();

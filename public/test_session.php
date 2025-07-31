@@ -19,14 +19,12 @@ require_once __DIR__ . '/../config/config.php';
 <body>
     <div class="container">
         <h1>🧪 Session Test</h1>
-        
         <div class="test-box info">
             <h3>📊 Current Session Status:</h3>
             <p><strong>Session ID:</strong> <?php echo session_id(); ?></p>
             <p><strong>Session Data:</strong></p>
             <pre><?php print_r($_SESSION); ?></pre>
         </div>
-
         <div class="test-box">
             <h3>🔐 Login Test:</h3>
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -34,19 +32,16 @@ require_once __DIR__ . '/../config/config.php';
                     <p>✅ <strong>Logged In:</strong> <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
                     <p><strong>Role:</strong> <?php echo $_SESSION['is_admin'] ? 'Admin' : 'Student'; ?></p>
                 </div>
-                
                 <h4>🧪 Test Admin Routes:</h4>
                 <p><a href="<?php echo base_url('majors'); ?>" target="_blank">📚 Test Majors Route</a></p>
                 <p><a href="<?php echo base_url('admin/applications'); ?>" target="_blank">📄 Test Admin Applications Route</a></p>
                 <p><a href="<?php echo base_url('dashboard'); ?>" target="_blank">📋 Test Dashboard Route</a></p>
-                
                 <hr>
                 <p><a href="<?php echo base_url('logout'); ?>">🚪 Logout</a></p>
             <?php else: ?>
                 <div class="error">
                     <p>❌ <strong>Not Logged In</strong></p>
                 </div>
-                
                 <h4>🔐 Quick Login:</h4>
                 <form method="POST" action="<?php echo base_url('login'); ?>">
                     <p>
@@ -58,14 +53,12 @@ require_once __DIR__ . '/../config/config.php';
                 <p><small>Auto-fill: admin@example.com / password</small></p>
             <?php endif; ?>
         </div>
-
         <div class="test-box">
             <h3>🔄 Actions:</h3>
             <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>">🔄 Refresh This Page</a></p>
             <p><a href="<?php echo base_url('admin_portal.php'); ?>">🛡️ Admin Portal</a></p>
             <p><a href="<?php echo base_url('test.php'); ?>">🧪 System Test</a></p>
         </div>
-
         <div class="test-box info">
             <h3>📝 Instructions:</h3>
             <ol>

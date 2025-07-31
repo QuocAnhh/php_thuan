@@ -64,44 +64,37 @@
             <h1>👤 Thông tin cá nhân</h1>
             <p>Cập nhật thông tin tài khoản của bạn</p>
         </div>
-
         <?php if (isset($_GET['success'])): ?>
             <div class="alert alert-success">
                 ✅ Thông tin đã được cập nhật thành công!
             </div>
         <?php endif; ?>
-
         <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-error">
                 ❌ Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.
             </div>
         <?php endif; ?>
-
         <div class="profile-form">
             <form method="POST" action="<?php echo base_url('profile'); ?>">
                 <div class="form-group">
                     <label for="name">Họ và tên:</label>
                     <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
                 </div>
-
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
                 </div>
-
                 <div class="form-group" style="margin-top: 2rem;">
                     <button type="submit" class="btn btn-primary">💾 Lưu thay đổi</button>
                     <a href="<?php echo base_url('dashboard'); ?>" class="btn btn-secondary">🏠 Về Dashboard</a>
                 </div>
             </form>
         </div>
-
         <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
             <h3>🔒 Bảo mật tài khoản</h3>
             <p>Để đảm bảo an toàn cho tài khoản, bạn nên thay đổi mật khẩu định kỳ.</p>
             <a href="<?php echo base_url('change-password'); ?>" class="btn btn-secondary">🔑 Đổi mật khẩu</a>
         </div>
-
         <div style="background: #e9ecef; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
             <h3>📊 Thông tin tài khoản</h3>
             <p><strong>ID tài khoản:</strong> <?php echo $user['id']; ?></p>

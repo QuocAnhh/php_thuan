@@ -1,15 +1,11 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
-// Check if accessed directly (not from controller)
 if (!isset($applications)) {
-    // This means the view was accessed directly, redirect through routing
     $current_url = $_SERVER['REQUEST_URI'];
     if (strpos($current_url, '/public/admin') !== false) {
-        // Direct access, redirect to proper route
         header('Location: ' . base_url('admin/applications'));
         exit();
     }
-    // If not direct access but still no $applications, show error
     die('Error: This page must be accessed through the proper route.');
 }
 if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) die('Unauthorized');

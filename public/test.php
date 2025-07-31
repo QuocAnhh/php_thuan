@@ -20,8 +20,6 @@ require_once __DIR__ . '/../config/config.php';
 <body>
     <div class="container">
         <h1>🧪 System Test Page</h1>
-        
-        <!-- Current Session Status -->
         <div class="test-section">
             <h2>📊 Current Session Status</h2>
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -35,8 +33,6 @@ require_once __DIR__ . '/../config/config.php';
                 </div>
             <?php endif; ?>
         </div>
-
-        <!-- Login Section -->
         <div class="test-section">
             <h2>🔐 Quick Login</h2>
             <div class="credentials">
@@ -44,11 +40,8 @@ require_once __DIR__ . '/../config/config.php';
                 Email: admin@example.com<br>
                 Password: password
             </div>
-            
             <p><a href="<?php echo base_url('login'); ?>" target="_blank">🔗 Go to Login Page</a></p>
         </div>
-
-        <!-- Admin Functions Test -->
         <div class="test-section">
             <h2>👨‍💼 Admin Functions</h2>
             <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
@@ -63,8 +56,6 @@ require_once __DIR__ . '/../config/config.php';
                 <p>❌ You need to login as Admin to test these functions</p>
             <?php endif; ?>
         </div>
-
-        <!-- Student Functions Test -->
         <div class="test-section">
             <h2>👨‍🎓 Student Functions</h2>
             <div class="credentials">
@@ -72,15 +63,12 @@ require_once __DIR__ . '/../config/config.php';
                 Email: student@example.com<br>
                 Password: (register new account or use existing)
             </div>
-            
             <ul>
                 <li><a href="<?php echo base_url('register'); ?>" target="_blank">📝 Register New Student</a></li>
                 <li><a href="<?php echo base_url('application/create'); ?>" target="_blank">📋 Create Application</a></li>
                 <li><a href="<?php echo base_url('my-application'); ?>" target="_blank">👀 View My Application</a></li>
             </ul>
         </div>
-
-        <!-- Database Info -->
         <div class="test-section">
             <h2>🗄️ Database Info</h2>
             <?php
@@ -95,14 +83,11 @@ require_once __DIR__ . '/../config/config.php';
             echo "</ul>";
             ?>
         </div>
-
-        <!-- Navigation -->
         <div class="test-section">
             <h2>🔗 Quick Navigation</h2>
             <p><a href="<?php echo base_url(''); ?>">🏠 Homepage</a></p>
             <p><a href="<?php echo base_url('logout'); ?>">🚪 Logout</a></p>
         </div>
-
         <hr>
         <p><small>💡 <strong>Tip:</strong> Open links in new tabs to keep this test page open for reference.</small></p>
     </div>

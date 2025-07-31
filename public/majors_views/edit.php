@@ -18,16 +18,12 @@ if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
         <h2>Edit Major</h2>
         <form action="<?php echo base_url('majors/update'); ?>" method="POST">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($major['id']); ?>">
-            
             <label for="name">Major Name:</label>
             <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($major['name']); ?>" required>
-            
             <label for="code">Major Code:</label>
             <input type="text" id="code" name="code" value="<?php echo htmlspecialchars($major['code']); ?>" required>
-            
             <label for="description">Description:</label>
             <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($major['description']); ?></textarea>
-            
             <button type="submit">Update Major</button>
         </form>
         <br>

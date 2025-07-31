@@ -58,9 +58,7 @@ if (!isset($_SESSION['user_id'])) {
             <h2>Chào mừng, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h2>
             <p><strong>Vai trò:</strong> <span style="color: <?php echo $_SESSION['is_admin'] ? '#dc3545' : '#28a745'; ?>;"><?php echo $_SESSION['is_admin'] ? '👨‍💼 Quản trị viên' : '👨‍🎓 Sinh viên'; ?></span></p>
         </div>
-        
         <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-        <!-- ADMIN MENU -->
         <div class="menu-section admin-section">
             <h3>👨‍💼 Chức năng Quản trị</h3>
             <div class="menu-grid">
@@ -79,8 +77,6 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
         <?php endif; ?>
-
-        <!-- STUDENT MENU -->
         <div class="menu-section student-section">
             <h3>👨‍🎓 Chức năng Sinh viên</h3>
             <div class="menu-grid">
@@ -102,8 +98,6 @@ if (!isset($_SESSION['user_id'])) {
                 </a>
             </div>
         </div>
-
-        <!-- COMMON SECTION -->
         <div class="menu-section">
             <h3>⚙️ Chức năng chung</h3>
             <div class="menu-grid">
@@ -117,7 +111,6 @@ if (!isset($_SESSION['user_id'])) {
                 </a>
             </div>
         </div>
-        
         <div style="text-align: center; padding: 2rem 0;">
             <a href="<?php echo base_url('logout'); ?>" style="display: inline-block; padding: 0.75rem 2rem; background: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">🚪 Đăng xuất</a>
         </div>

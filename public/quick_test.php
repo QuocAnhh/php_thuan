@@ -18,8 +18,6 @@ require_once __DIR__ . '/../config/config.php';
 <body>
     <div class="container">
         <h1>⚡ Quick Test - Admin & Student</h1>
-        
-        <!-- Current Status -->
         <div class="test-section">
             <h3>📊 Trạng thái hiện tại:</h3>
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -30,13 +28,9 @@ require_once __DIR__ . '/../config/config.php';
             <?php endif; ?>
             <p><strong>Session ID:</strong> <?php echo session_id(); ?></p>
         </div>
-
         <?php if (!isset($_SESSION['user_id'])): ?>
-        <!-- LOGIN OPTIONS -->
         <div class="test-section">
             <h3>🔐 Login Options:</h3>
-            
-            <!-- Admin Login -->
             <div class="admin-section" style="margin: 1rem 0; padding: 1rem;">
                 <h4>👨‍💼 Admin Login</h4>
                 <form method="POST" action="<?php echo base_url('login'); ?>" class="quick-login">
@@ -46,8 +40,6 @@ require_once __DIR__ . '/../config/config.php';
                 </form>
                 <p><small>Email: admin@example.com | Password: password</small></p>
             </div>
-            
-            <!-- Student Login -->
             <div class="student-section" style="margin: 1rem 0; padding: 1rem;">
                 <h4>👨‍🎓 Student Login</h4>
                 <form method="POST" action="<?php echo base_url('login'); ?>" class="quick-login">
@@ -59,13 +51,9 @@ require_once __DIR__ . '/../config/config.php';
             </div>
         </div>
         <?php else: ?>
-
-        <!-- LOGGED IN - TEST FUNCTIONS -->
         <div class="test-section">
             <h3>🚀 Test Chức năng:</h3>
-            
             <?php if ($_SESSION['is_admin']): ?>
-            <!-- ADMIN FUNCTIONS -->
             <div class="admin-section" style="margin: 1rem 0; padding: 1rem;">
                 <h4>👨‍💼 Admin Functions</h4>
                 <p><strong>🛣️ Via Main Routes:</strong></p>
@@ -76,8 +64,6 @@ require_once __DIR__ . '/../config/config.php';
                 </p>
             </div>
             <?php endif; ?>
-            
-            <!-- STUDENT FUNCTIONS -->
             <div class="student-section" style="margin: 1rem 0; padding: 1rem;">
                 <h4>👨‍🎓 Student Functions</h4>
                 <p><strong>🛣️ Via Main Routes:</strong></p>
@@ -87,13 +73,10 @@ require_once __DIR__ . '/../config/config.php';
                     <a href="<?php echo base_url('dashboard'); ?>" target="_blank" style="display: inline-block; margin: 0.2rem; padding: 0.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 3px;">📋 Dashboard</a>
                 </p>
             </div>
-            
             <hr>
             <a href="<?php echo base_url('logout'); ?>" style="padding: 0.5rem 1rem; background: #6c757d; color: white; text-decoration: none; border-radius: 3px;">🚪 Logout</a>
         </div>
         <?php endif; ?>
-
-        <!-- INSTRUCTIONS -->
         <div class="test-section">
             <h3>📝 Hướng dẫn:</h3>
             <ol>
@@ -102,14 +85,12 @@ require_once __DIR__ . '/../config/config.php';
                 <li><strong>Test các chức năng</strong> - mở links trong tab mới</li>
                 <li><strong>Kiểm tra Dashboard</strong> có hiển thị đúng menu theo role không</li>
             </ol>
-            
             <h4>🐛 Debug Tools:</h4>
             <p>
                 <a href="<?php echo base_url('debug_login.php'); ?>" style="padding: 0.3rem 0.7rem; background: #17a2b8; color: white; text-decoration: none; border-radius: 3px;">🐛 Debug Login</a>
                 <a href="<?php echo base_url('check_users.php'); ?>" style="padding: 0.3rem 0.7rem; background: #6f42c1; color: white; text-decoration: none; border-radius: 3px;">👥 Check Users</a>
             </p>
         </div>
-
         <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>">🔄 Refresh Page</a></p>
     </div>
 </body>

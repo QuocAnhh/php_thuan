@@ -2,7 +2,6 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Simple admin check
 if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
     die('Unauthorized access.');
 }
@@ -20,13 +19,10 @@ if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
         <form action="<?php echo base_url('majors/create'); ?>" method="POST">
             <label for="name">Major Name:</label>
             <input type="text" id="name" name="name" required>
-            
             <label for="code">Major Code:</label>
             <input type="text" id="code" name="code" required>
-            
             <label for="description">Description:</label>
             <textarea id="description" name="description" rows="4"></textarea>
-            
             <button type="submit">Create Major</button>
         </form>
         <br>

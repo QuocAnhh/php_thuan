@@ -40,7 +40,6 @@
             <h1>🎯 Kết quả Tuyển sinh</h1>
             <p>Trạng thái hồ sơ tuyển sinh của bạn</p>
         </div>
-
         <?php if (empty($applications)): ?>
             <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
                 <h3>📋 Chưa có hồ sơ nào</h3>
@@ -64,26 +63,22 @@
                             ?>
                         </span>
                     </div>
-                    
                     <div class="info-row">
                         <strong>Ngày nộp:</strong>
                         <span><?php echo date('d/m/Y H:i', strtotime($app['created_at'])); ?></span>
                     </div>
-                    
                     <?php if ($app['updated_at'] && $app['updated_at'] != $app['created_at']): ?>
                     <div class="info-row">
                         <strong>Cập nhật lần cuối:</strong>
                         <span><?php echo date('d/m/Y H:i', strtotime($app['updated_at'])); ?></span>
                     </div>
                     <?php endif; ?>
-                    
                     <div style="margin-top: 1rem;">
                         <a href="<?php echo base_url('application/show?id=' . $app['id']); ?>" style="display: inline-block; padding: 0.5rem 1rem; background: #007bff; color: white; text-decoration: none; border-radius: 3px;">👁️ Xem chi tiết</a>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
-
         <div style="text-align: center; padding: 2rem 0;">
             <a href="<?php echo base_url('dashboard'); ?>" style="display: inline-block; padding: 0.75rem 2rem; background: #6c757d; color: white; text-decoration: none; border-radius: 5px;">🏠 Về Dashboard</a>
         </div>

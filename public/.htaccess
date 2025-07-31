@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
+
     # Disable directory browsing and auto-redirect to index.php in subdirectories
     Options -Indexes
     DirectoryIndex index.php

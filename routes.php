@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/homeController.php';
 require_once __DIR__ . '/aboutController.php';
 require_once __DIR__ . '/authController.php';
@@ -7,7 +6,6 @@ require_once __DIR__ . '/dashboardController.php';
 require_once __DIR__ . '/majorController.php';
 require_once __DIR__ . '/applicationController.php';
 require_once __DIR__ . '/adminController.php';
-
 $routes = [
     '/' => [
         'GET' => 'home_page'
@@ -29,8 +27,6 @@ $routes = [
     '/logout' => [
         'GET' => 'handle_logout'
     ],
-    
-    // Student Application Routes
     '/applications/create' => [
         'GET' => 'applications_create_form',
         'POST' => 'applications_store'
@@ -59,8 +55,6 @@ $routes = [
         'GET' => 'show_change_password',
         'POST' => 'handle_change_password'
     ],
-    
-    // Admin Routes
     '/admin/applications' => [
         'GET' => 'admin_applications_index'
     ],
@@ -70,8 +64,6 @@ $routes = [
     '/admin/applications/update-status' => [
         'POST' => 'admin_applications_update_status'
     ],
-    
-    // Majors Routes
     '/majors' => [
         'GET' => 'majors_index'
     ],
@@ -89,5 +81,4 @@ $routes = [
         'GET' => 'majors_delete'
     ]
 ];
-
 return $routes; 

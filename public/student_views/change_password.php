@@ -73,13 +73,11 @@
             <h1>🔒 Đổi mật khẩu</h1>
             <p>Cập nhật mật khẩu để bảo vệ tài khoản của bạn</p>
         </div>
-
         <?php if (isset($_GET['success'])): ?>
             <div class="alert alert-success">
                 ✅ Mật khẩu đã được thay đổi thành công!
             </div>
         <?php endif; ?>
-
         <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-error">
                 <?php
@@ -92,32 +90,27 @@
                 ?>
             </div>
         <?php endif; ?>
-
         <div class="password-form">
             <form method="POST" action="<?php echo base_url('change-password'); ?>" onsubmit="return validateForm()">
                 <div class="form-group">
                     <label for="current_password">Mật khẩu hiện tại:</label>
                     <input type="password" id="current_password" name="current_password" required>
                 </div>
-
                 <div class="form-group">
                     <label for="new_password">Mật khẩu mới:</label>
                     <input type="password" id="new_password" name="new_password" required minlength="6">
                     <small style="color: #666;">Tối thiểu 6 ký tự</small>
                 </div>
-
                 <div class="form-group">
                     <label for="confirm_password">Xác nhận mật khẩu mới:</label>
                     <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
                 </div>
-
                 <div class="form-group" style="margin-top: 2rem;">
                     <button type="submit" class="btn btn-primary">🔑 Đổi mật khẩu</button>
                     <a href="<?php echo base_url('profile'); ?>" class="btn btn-secondary">🔙 Quay lại</a>
                 </div>
             </form>
         </div>
-
         <div class="security-tips">
             <h3>💡 Mẹo bảo mật</h3>
             <ul>
@@ -128,27 +121,22 @@
                 <li>Không chia sẻ mật khẩu với người khác</li>
             </ul>
         </div>
-
         <div style="text-align: center; padding: 2rem 0;">
             <a href="<?php echo base_url('dashboard'); ?>" class="btn btn-secondary">🏠 Về Dashboard</a>
         </div>
     </div>
-
     <script>
         function validateForm() {
             const newPassword = document.getElementById('new_password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
-            
             if (newPassword !== confirmPassword) {
                 alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
                 return false;
             }
-            
             if (newPassword.length < 6) {
                 alert('Mật khẩu mới phải có ít nhất 6 ký tự!');
                 return false;
             }
-            
             return true;
         }
     </script>

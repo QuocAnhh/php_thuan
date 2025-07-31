@@ -15,7 +15,6 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="container">
         <h1>Chào mừng đến với Hệ thống xét tuyển</h1>
         <p>Hệ thống quản lý hồ sơ xét tuyển đại học online</p>
-        
         <?php if (isset($_SESSION['user_id'])): ?>
             <h3>Xin chào, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h3>
             <p><a href="<?php echo base_url('dashboard'); ?>">Vào Dashboard</a></p>
@@ -28,7 +27,6 @@ if (session_status() === PHP_SESSION_NONE) {
                 </p>
             </div>
         <?php endif; ?>
-        
         <hr style="margin: 2rem 0;">
         <p><a href="<?php echo base_url('about'); ?>">Về chúng tôi</a></p>
     </div>

@@ -34,7 +34,6 @@
             <h1>📖 Thông tin Ngành học</h1>
             <p>Danh sách các ngành đào tạo tại trường</p>
         </div>
-
         <?php if (empty($majors)): ?>
             <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
                 <h3>📋 Chưa có ngành học nào</h3>
@@ -53,7 +52,6 @@
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-
         <div style="text-align: center; padding: 2rem 0;">
             <a href="<?php echo base_url('dashboard'); ?>" style="display: inline-block; padding: 0.75rem 2rem; background: #007bff; color: white; text-decoration: none; border-radius: 5px; margin: 0.5rem;">🏠 Về Dashboard</a>
             <a href="<?php echo base_url('applications/create'); ?>" style="display: inline-block; padding: 0.75rem 2rem; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin: 0.5rem;">📝 Nộp hồ sơ</a>

@@ -21,7 +21,6 @@ if (!isset($_SESSION['user_id'])) {
     <div class="container">
         <h2>Submit Your Application</h2>
         <form action="<?php echo base_url('application/create'); ?>" method="POST" enctype="multipart/form-data">
-            
             <h3>Your Aspirations</h3>
             <div id="aspirations-container">
                 <div class="aspiration-item">
@@ -37,19 +36,15 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
             <button type="button" id="add-aspiration">Add Another Aspiration</button>
-
             <h3 style="margin-top: 2rem;">Required Documents</h3>
             <label for="doc_transcript">High School Transcript:</label>
             <input type="file" id="doc_transcript" name="documents[transcript]" required>
-            
             <label for="doc_certificate">Graduation Certificate:</label>
             <input type="file" id="doc_certificate" name="documents[certificate]" required>
-
             <hr style="margin: 2rem 0;">
             <button type="submit">Submit Application</button>
         </form>
     </div>
-
     <script>
         document.getElementById('add-aspiration').addEventListener('click', function() {
             const container = document.getElementById('aspirations-container');
