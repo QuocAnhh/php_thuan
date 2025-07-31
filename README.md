@@ -49,8 +49,8 @@
     - Tải mã nguồn về dưới dạng file ZIP và giải nén.
     - Hoặc dùng Git:
     ```bash
-    git clone <your-repo-url>
-    cd <project-folder>
+    git clone https://github.com/QuocAnhh/php_thuan.git
+    cd php_thuan
     ```
 
 2.  **Khởi động XAMPP**: Đảm bảo các dịch vụ Apache và MySQL đang chạy.
