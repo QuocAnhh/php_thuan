@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Don't redirect if file exists in public
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Don't redirect for routes that should go through routing
+    RewriteCond %{REQUEST_URI} !^/(majors|admin|dashboard|login|register|logout|my-application|application)
+    
+    # Redirect static assets and other requests to the public folder
+    RewriteRule ^(.*)$ public/$1 [L]
+    
+    # For route requests, send directly to public/index.php
+    RewriteCond %{REQUEST_URI} ^/(majors|admin|dashboard|login|register|logout|my-application|application)
+    RewriteRule ^(.*)$ public/index.php [L]
+</IfModule> 
