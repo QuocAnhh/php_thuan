@@ -1,88 +1,438 @@
-# Tuyển sinh Đại học 
+# 🎓 BTL Web - Backend API Documentation
 
-## Chức năng
+## 🌐 Server Information
 
-- **Xác thực người dùng**: Hệ thống đăng ký và đăng nhập đơn giản, an toàn cho sinh viên và quản trị viên.
-- **Trang tổng quan Sinh viên**: Người dùng có thể tạo, nộp, và xem hồ sơ xét tuyển của mình.
-- **Form Hồ sơ Động**: Người dùng có thể thêm nhiều "nguyện vọng" (lựa chọn ngành học) vào hồ sơ một cách linh hoạt.
-- **Tải lên Tập tin**: Người dùng có thể tải lên các tài liệu cần thiết (ví dụ: học bạ, giấy chứng nhận).
-- **Bảng điều khiển Admin**:
-  - **Quản lý Ngành học**: Admin có thể thực hiện các thao tác CRUD (Tạo, Đọc, Cập nhật, Xóa) đối với các ngành học của trường.
-  - **Quản lý Hồ sơ**: Admin có thể xem tất cả hồ sơ đã nộp, kiểm tra chi tiết, và cập nhật trạng thái (Đã duyệt, Đã từ chối, Đang chờ).
-- **Routing Đơn giản**: Một router thủ tục (procedural) cơ bản xử lý tất cả các yêu cầu.
-- **Mã nguồn Thủ tục**: Codebase chủ yếu sử dụng PHP theo lối lập trình thủ tục với phần mở rộng `mysqli` để tương tác với cơ sở dữ liệu, giúp người mới bắt đầu dễ dàng tìm hiểu.
+**Backend URL:** `http://localhost/btl-web`  
+**Port:** `80` (Apache - XAMPP)  
+**Technology:** PHP + MySQL  
+**Auth Method:** Session-based  
 
-## Cấu trúc Dự án
+---
 
+## 🔐 Authentication Endpoints
+
+### Login
 ```
-/
-├── config/
-│   └── config.php         # kết nối db
-├── public/
-│   ├── css/style.css      # css
-│   ├── uploads/           # docs mà user upload
-│   ├── auth/              # log in, log out
-│   ├── majors/            # manage major (admin)
-│   ├── applications/      # submit application (user)
-│   ├── admin/             # manage application (admin)
-│   └── index.php          # điểm vào chính và router
-├── aboutController.php
-├── adminController.php
-├── applicationController.php
-├── authController.php
-├── dashboardController.php
-├── homeController.php
-├── majorController.php
-├── database.sql           # config db
-└── README.md              # file này
+POST /btl-web/login
+Content-Type: application/x-www-form-urlencoded
+
+Body:
+email=admin@example.com&password=password
 ```
 
-## Hướng dẫn Cài đặt và Chạy
+### Register
+```
+POST /btl-web/register
+Content-Type: application/x-www-form-urlencoded
 
-### 1. Yêu cầu
+Body:
+name=User Name&email=user@example.com&password=password
+```
 
-- [XAMPP](https://www.apachefriends.org/index.html) hoặc bất kỳ máy chủ cục bộ nào khác hỗ trợ PHP và MySQL.
+### Logout
+```
+GET /btl-web/logout
+```
 
-### 2. Các bước Cài đặt
+### Check Authentication
+```
+GET /btl-web/dashboard
+// Redirect to login nếu chưa đăng nhập
+```
 
-1.  **Tải về dự án**:
-    - Tải mã nguồn về dưới dạng file ZIP và giải nén.
-    - Hoặc dùng Git:
-    ```bash
-    git clone https://github.com/QuocAnhh/php_thuan.git
-    cd php_thuan
-    ```
+---
 
-2.  **Khởi động XAMPP**: Đảm bảo các dịch vụ Apache và MySQL đang chạy.
+## 👨‍💼 Admin Endpoints
 
-3.  **Tạo Cơ sở dữ liệu**:
-    - Mở phpMyAdmin (thường ở địa chỉ `http://localhost/phpmyadmin`).
-    - Tạo một cơ sở dữ liệu mới có tên là `backend_web_db`.
-    - **Quan trọng**: Nếu bạn đã có sẵn database, hãy chắc chắn rằng cấu trúc của nó (tên bảng, tên cột) khớp với file `database.sql`. Nếu không, hãy cân nhắc sử dụng một database mới và import file `database.sql` để đảm bảo tương thích.
-    - Để tạo mới, chọn cơ sở dữ liệu vừa tạo và chuyển đến tab "Import" (Nhập).
-    - Nhấp vào "Choose File" (Chọn tệp) và tìm đến tệp `database.sql` trong thư mục gốc của dự án.
-    - Nhấp vào "Go" (Thực hiện) để nhập cấu trúc cơ sở dữ liệu.
+### Quản lý Ngành học
 
-4.  **Cấu hình Cơ sở dữ liệu**:
-    - Mở tệp `config/config.php`.
-    - Nếu thông tin đăng nhập MySQL của bạn khác với mặc định (tên người dùng `root` và không có mật khẩu), hãy cập nhật các hằng số `DB_USER` và `DB_PASS`.
+#### Danh sách ngành
+```
+GET /btl-web/majors
+Response: HTML table hoặc thêm ?format=json cho JSON
+```
 
-5.  **Chạy Dự án**:
-    - **Sử dụng Server tích hợp của PHP (Khuyến khích)**:
-      - Mở terminal (dòng lệnh) và điều hướng đến thư mục `public/`:
-        ```bash
-        cd public
-        ```
-      - Khởi động server:
-        ```bash
-        php -S localhost:8000
-        ```
-      - Mở trình duyệt web và truy cập `http://localhost:8000`.
+#### Tạo ngành mới  
+```
+GET /btl-web/majors/create
+Response: Form HTML để tạo ngành
+```
 
-    - **Sử dụng thư mục `htdocs` của XAMPP**:
-      - Sao chép toàn bộ thư mục dự án vào thư mục `htdocs` của XAMPP.
-      - Mở trình duyệt web và điều hướng đến `http://localhost/<tên-thư-mục-dự-án>/public`.
+```
+POST /btl-web/majors/create
+Content-Type: application/x-www-form-urlencoded
 
-### 3. Tài khoản Admin Mặc định
+Body:
+code=IT01&name=Công nghệ thông tin&description=Mô tả ngành
+```
 
-Sau khi config db, bạn có thể đăng ký một tài khoản mới. Để cấp quyền admin cho một tài khoản, bạn cần chỉnh sửa thủ công cột `is_admin` cho người dùng đó trong bảng `users` thông qua phpMyAdmin. Thay đổi giá trị từ `0` thành `1`. 
+#### Sửa ngành
+```
+GET /btl-web/majors/edit?id=1
+Response: Form HTML để sửa ngành
+```
+
+```
+POST /btl-web/majors/update
+Content-Type: application/x-www-form-urlencoded
+
+Body:
+id=1&code=IT01&name=New Name&description=New Description
+```
+
+#### Xóa ngành
+```
+GET /btl-web/majors/delete?id=1
+```
+
+### Quản lý Hồ sơ
+
+#### Danh sách hồ sơ
+```
+GET /btl-web/admin/applications
+Response: HTML list hoặc thêm ?format=json cho JSON
+```
+
+#### Chi tiết hồ sơ
+```
+GET /btl-web/admin/applications/show?id=1
+Response: HTML chi tiết hồ sơ
+```
+
+#### Cập nhật trạng thái hồ sơ
+```
+POST /btl-web/admin/applications/update-status
+Content-Type: application/x-www-form-urlencoded
+
+Body:
+id=1&status=approved
+// status: pending, processing, approved, rejected
+```
+
+---
+
+## 👨‍🎓 Student Endpoints
+
+### Hồ sơ tuyển sinh
+
+#### Tạo hồ sơ mới
+```
+GET /btl-web/applications/create
+Response: Form HTML để tạo hồ sơ
+```
+
+```
+POST /btl-web/applications/create
+Content-Type: multipart/form-data
+
+Body: FormData with files
+- Thông tin cá nhân
+- Nguyện vọng (majors)
+- File upload (documents)
+```
+
+#### Xem hồ sơ của tôi
+```
+GET /btl-web/my-application
+Response: Redirect tới /application/show nếu có hồ sơ
+```
+
+#### Chi tiết hồ sơ
+```
+GET /btl-web/application/show?id=1
+Response: HTML chi tiết hồ sơ của student
+```
+
+### Thông tin ngành học
+```
+GET /btl-web/majors-info
+Response: HTML danh sách ngành (public view)
+```
+
+### Kết quả tuyển sinh
+```
+GET /btl-web/admission-results
+Response: HTML kết quả tuyển sinh của student
+```
+
+### Quản lý tài khoản
+
+#### Thông tin cá nhân
+```
+GET /btl-web/profile
+Response: Form HTML thông tin user
+```
+
+```
+POST /btl-web/profile
+Content-Type: application/x-www-form-urlencoded
+
+Body:
+name=New Name&email=new@email.com
+```
+
+#### Đổi mật khẩu
+```
+GET /btl-web/change-password
+Response: Form HTML đổi password
+```
+
+```
+POST /btl-web/change-password
+Content-Type: application/x-www-form-urlencoded
+
+Body:
+current_password=old&new_password=new&confirm_password=new
+```
+
+---
+
+## 🏠 Common Endpoints
+
+### Homepage
+```
+GET /btl-web/
+Response: Homepage HTML
+```
+
+### About
+```
+GET /btl-web/about
+Response: About page HTML
+```
+
+### Dashboard
+```
+GET /btl-web/dashboard
+Response: User dashboard (different UI cho Admin/Student)
+```
+
+---
+
+## 📋 Sample Fetch Code cho Frontend
+
+### Basic AJAX Call
+```javascript
+// GET request
+async function fetchEndpoint(endpoint) {
+    const response = await fetch(`http://localhost/btl-web${endpoint}`, {
+        credentials: 'same-origin' // Important cho session
+    });
+    
+    if (response.redirected) {
+        // Có thể bị redirect tới login
+        window.location.href = response.url;
+        return;
+    }
+    
+    return await response.text(); // HTML
+}
+
+// POST request
+async function postData(endpoint, data) {
+    const formData = new FormData();
+    Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+    });
+    
+    const response = await fetch(`http://localhost/btl-web${endpoint}`, {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin'
+    });
+    
+    return response;
+}
+```
+
+### Usage Examples
+```javascript
+// Login
+await postData('/login', {
+    email: 'admin@example.com',
+    password: 'password'
+});
+
+// Load majors
+const majorsHtml = await fetchEndpoint('/majors');
+document.getElementById('content').innerHTML = majorsHtml;
+
+// Create major (Admin only)
+await postData('/majors/create', {
+    code: 'CS01',
+    name: 'Computer Science',
+    description: 'CS Description'
+});
+
+// Load dashboard
+const dashboardHtml = await fetchEndpoint('/dashboard');
+```
+
+---
+
+## 🔒 Authentication & Sessions
+
+### Session Management
+- Backend sử dụng **PHP Sessions**
+- Cookies được set tự động
+- **Quan trọng**: Luôn dùng `credentials: 'same-origin'` trong fetch
+
+### User Roles
+```javascript
+// Check user role từ dashboard response
+const response = await fetch('/btl-web/dashboard');
+const html = await response.text();
+
+// Parse HTML để lấy thông tin user
+if (html.includes('Admin Menu')) {
+    // User là admin
+    showAdminFeatures();
+} else {
+    // User là student
+    showStudentFeatures();
+}
+```
+
+### Error Handling
+```javascript
+async function handleResponse(response) {
+    if (response.redirected && response.url.includes('login')) {
+        // Session expired, cần login lại
+        showLoginModal();
+        return null;
+    }
+    
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+    }
+    
+    return await response.text();
+}
+```
+
+---
+
+## 🧪 Test Accounts
+
+### Admin Account
+```
+Email: admin@example.com
+Password: password
+Role: Administrator
+```
+
+### Student Account
+```
+Email: student@example.com
+Password: password
+Role: Student
+```
+
+---
+
+## 📊 Database Schema
+
+### Users Table
+```sql
+- id (int, primary key)
+- name (varchar)
+- email (varchar, unique)
+- password (varchar, hashed)
+- is_admin (boolean)
+- created_at, updated_at
+```
+
+### Majors Table
+```sql
+- id (int, primary key)
+- code (varchar, unique) 
+- name (varchar)
+- description (text)
+- created_at, updated_at
+```
+
+### Applications Table
+```sql
+- id (int, primary key)
+- user_id (int, foreign key)
+- status (enum: pending, processing, approved, rejected)
+- created_at, updated_at
+```
+
+---
+
+## 🚀 Quick Start cho Frontend
+
+### 1. Test Backend Connection
+```javascript
+fetch('http://localhost/btl-web/backend_test.php')
+  .then(response => response.text())
+  .then(html => console.log('Backend Status:', html.includes('READY FOR FRONTEND')));
+```
+
+### 2. Test Authentication
+```javascript
+// Test login
+fetch('http://localhost/btl-web/login', {
+    method: 'POST',
+    body: new URLSearchParams({
+        email: 'admin@example.com',
+        password: 'password'
+    })
+}).then(response => {
+    console.log('Login Status:', response.status);
+});
+```
+
+### 3. Test Endpoints
+```javascript
+const endpoints = [
+    '/dashboard',
+    '/majors', 
+    '/applications/create',
+    '/admin/applications'
+];
+
+endpoints.forEach(async (endpoint) => {
+    const response = await fetch(`http://localhost/btl-web${endpoint}`);
+    console.log(`${endpoint}: ${response.status}`);
+});
+```
+
+---
+
+## 🎯 Development Tips
+
+### CORS Note
+- Không cần CORS config vì cùng domain
+- Chỉ cần `credentials: 'same-origin'`
+
+### File Uploads
+```javascript
+// Upload files
+const formData = new FormData();
+formData.append('document', fileInput.files[0]);
+formData.append('other_field', 'value');
+
+fetch('/btl-web/applications/create', {
+    method: 'POST',
+    body: formData,
+    credentials: 'same-origin'
+});
+```
+
+### Error Debugging
+- Check `http://localhost/btl-web/backend_test.php` cho system status
+- Check browser Network tab cho HTTP errors
+- Check Apache error logs nếu cần
+
+---
+
+## 📞 Support
+
+**Backend Ready**: ✅ All 27 endpoints working  
+**Database**: ✅ Connected with sample data  
+**Authentication**: ✅ Session-based auth working  
+**File Upload**: ✅ Configured and tested  
+
+**Frontend team có thể bắt đầu ngay! 🚀** 
